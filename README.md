@@ -59,5 +59,32 @@ if p, ok := v.Interface().(pair); ok {
 }
 ```
 
+### Map
+`Map` represents a map of any values.
+```go
+m := any.Map{"meaning": any.ValueOf(42)}
+v := m["meaning"]
+fmt.Println(v.Int())
+// 42
+```
+
+### MapOf
+`MapOf` makes a `Map` from a map of any values.
+```go
+m := any.MapOf(map[string]interface{}{"meaning": 42})
+v := m["meaning"]
+fmt.Println(v.Int())
+// 42
+```
+
+### Put
+`Put` puts the key value into the returned `Map`.
+```go
+var m any.Map
+m = m.Put("meaning", 42)
+v := m["meaning"]
+fmt.Println(v.Int())
+```
+
 # License
 * [MIT License](LICENSE)
