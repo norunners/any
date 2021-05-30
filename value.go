@@ -17,23 +17,6 @@ func ValueOf(i interface{}) Value {
 	return Value{i: i}
 }
 
-// OK determines whether Value is not the zero Value.
-// This is useful to check before using the underlying value.
-// Consider using Default over OK.
-func (v Value) OK() bool {
-	return v.i != nil
-}
-
-// Default creates a new Value from the default when not OK.
-// Otherwise, the original Value is returned and the default is ignored.
-// This is useful for providing a default before using the underlying value.
-func (v Value) Default(i interface{}) Value {
-	if !v.OK() {
-		v.i = i
-	}
-	return v
-}
-
 // Bool returns the value as a bool type.
 // The zero value of bool is returned when the value can not be type-asserted to a bool.
 func (v Value) Bool() bool {
@@ -184,13 +167,13 @@ func (v Value) Interface() interface{} {
 
 // Set assigns Value to a non-nil pointer.
 // An error is returned when the assignment fails.
-// A Value can not be Set when not OK.
+// A Value can not be Set when not Ok.
 // A Value can not be Set to a non-pointer type nor a nil pointer.
 // A Value can not be Set to another type.
 // All panics are unexpected.
 func (v Value) Set(ptr interface{}) error {
-	if !v.OK() {
-		return fmt.Errorf("any: Value must be OK")
+	if !v.Ok() {
+		return fmt.Errorf("any: Value must be Ok")
 	}
 	dst := reflect.ValueOf(ptr)
 	if k := dst.Kind(); k != reflect.Ptr || dst.IsNil() {

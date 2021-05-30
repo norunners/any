@@ -19,21 +19,37 @@ fmt.Println(v.String())
 // "hello"
 ```
 
-### OK
-`OK` determines whether `Value` is not the zero `Value`.
+### Ok
+`Ok` determines whether `Value` is not the zero `Value`.
 ```go
-if v := any.ValueOf("hello"); v.OK() {
-	fmt.Println(v.String())
-	// "hello"
-}
+v := any.ValueOf("hello")
+fmt.Println(v.Ok())
+// true
 ```
 
-### Default
-`Default` creates a new `Value` from the default when not `OK`.
+### [Type]Ok
+[Type]Ok returns the value as a [Type] type and a bool whether the Value is of type [Type].
+```go
+v := any.ValueOf("hello")
+s, ok := v.StringOk()
+fmt.Println(s, ok)
+// "hello" true
+```
+
+### Or
+`Or` sets the Value to the default when not `Ok` and returns the `Value`.
 ```go
 var v any.Value
-v = v.Default("world")
+v = v.Or("world")
 fmt.Println(v.String())
+// "world"
+```
+### [Type]Or
+[Type]Or returns the value as a [Type] type or the default when the Value is not of type [Type].
+```go
+var v any.Value
+s := v.StringOr("world")
+fmt.Println(s)
 // "world"
 ```
 
@@ -84,6 +100,7 @@ var m any.Map
 m = m.Put("meaning", 42)
 v := m["meaning"]
 fmt.Println(v.Int())
+// 42
 ```
 
 # License
