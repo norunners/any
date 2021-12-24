@@ -103,5 +103,17 @@ fmt.Println(v.Int())
 // 42
 ```
 
+### Equal
+`Equal` determines if a `Value` is equal to another `Value`.
+```go
+v := any.ValueOf("hello")
+fmt.Println(v.Equal(v))
+// true
+i := any.ValueOf(42)
+fmt.Println(v.Equal(i))
+// false
+```
+`Map` also provides `Equal` behavior.
+
 # License
 * [MIT License](LICENSE)

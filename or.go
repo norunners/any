@@ -1,4 +1,3 @@
-// Package any is an empty interface replacement.
 package any
 
 // Or sets the Value to the default when not Ok and returns the Value.
